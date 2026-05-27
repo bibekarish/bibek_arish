@@ -8,14 +8,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
-/* Reset and core alignment across both Mobile and PC viewports */
+/* Reset and core alignment across viewports */
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    margin: 0;
-    padding: 20px;
     font-family: 'Plus Jakarta Sans', sans-serif;
     min-height: 100vh;
     display: flex;
@@ -24,16 +24,18 @@ body {
     overflow-x: hidden;
     background: #ffffff;
     color: #7200ff;
+    padding: 20px;
 }
 
-/* Premium smooth light gradient background using only white and #7200ff shades */
+/* Premium smooth light gradient background - Optimized with Hardware Acceleration */
 .bg {
     position: fixed;
     inset: 0;
     background: linear-gradient(-45deg, #ffffff, #f5efff, #e6d5ff, #ffffff);
     background-size: 400% 400%;
-    animation: bg 12s ease infinite;
+    animation: bg 16s ease infinite;
     z-index: 1;
+    transform: translateZ(0); /* Forces GPU implementation */
 }
 
 @keyframes bg {
@@ -42,18 +44,19 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* Blur Overlay Gate - Restricts interface view until interaction */
+/* Blur Overlay Gate - Optimized to prevent painting lag */
 .blur-overlay {
     position: fixed;
     inset: 0;
     z-index: 999;
-    background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.8s;
+    transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.5s;
+    will-change: opacity, visibility;
 }
 
 /* Button inside the overlay */
@@ -66,17 +69,17 @@ body {
     border: 2px solid #7200ff;
     border-radius: 20px;
     cursor: pointer;
-    box-shadow: 0 10px 30px rgba(114, 0, 255, 0.15);
+    box-shadow: 0 10px 30px rgba(114, 0, 255, 0.12);
     letter-spacing: 1px;
     text-transform: uppercase;
-    transition: all 0.3s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease, color 0.25s ease;
 }
 
 .enter-btn:hover {
     color: #ffffff;
     background: #7200ff;
     transform: translateY(-2px);
-    box-shadow: 0 15px 35px rgba(114, 0, 255, 0.3);
+    box-shadow: 0 15px 35px rgba(114, 0, 255, 0.25);
 }
 
 /* Active Hidden State for Overlay */
@@ -95,18 +98,18 @@ body {
     padding: 35px 25px;
     border-radius: 30px;
     text-align: center;
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border: 2px solid #7200ff;
-    box-shadow: 0 20px 40px rgba(114, 0, 255, 0.08), 
-                0 0 30px rgba(114, 0, 255, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 20px 40px rgba(114, 0, 255, 0.06);
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+    will-change: transform;
 }
 
 .card:hover {
-    box-shadow: 0 25px 50px rgba(114, 0, 255, 0.15), 
-                0 0 40px rgba(114, 0, 255, 0.2);
+    transform: translateY(-4px);
+    box-shadow: 0 25px 50px rgba(114, 0, 255, 0.14);
 }
 
 /* PFP Container with strict #7200ff boundary */
@@ -117,18 +120,23 @@ body {
     border-radius: 50%;
     overflow: hidden;
     border: 3px solid #7200ff;
-    box-shadow: 0 0 20px rgba(114, 0, 255, 0.2);
-    transition: transform 0.5s ease;
+    box-shadow: 0 0 20px rgba(114, 0, 255, 0.3);
+    transition: transform 0.4s ease;
+    background: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .card:hover .pfp {
-    transform: rotate(5deg) scale(1.03);
+    transform: rotate(4deg) scale(1.04);
 }
 
 .pfp img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top center;
 }
 
 h1 {
@@ -139,7 +147,7 @@ h1 {
     color: #7200ff;
 }
 
-/* Bio Structure set completely to #7200ff */
+/* Bio Structure */
 .bio {
     margin-top: 15px;
     color: #7200ff;
@@ -156,10 +164,10 @@ h1 {
 }
 
 .links {
-    margin-top: 30px;
+    margin-top: 25px;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
 }
 
 /* Links customized with responsive scaling */
@@ -171,12 +179,11 @@ h1 {
     padding: 14px 20px;
     border-radius: 16px;
     background: rgba(114, 0, 255, 0.04);
-    border: 1px solid rgba(114, 0, 255, 0.25);
+    border: 1px solid rgba(114, 0, 255, 0.2);
     display: flex;
     align-items: center;
     gap: 14px;
-    text-align: left;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: transform 0.25s ease, color 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
 }
 
 /* Strict #7200ff Icon Fill color */
@@ -185,35 +192,30 @@ h1 {
     height: 20px;
     fill: #7200ff;
     flex-shrink: 0;
-    transition: fill 0.3s ease, transform 0.3s ease;
+    transition: fill 0.25s ease, transform 0.25s ease;
 }
 
 /* Premium Inversion Hover State */
 .links a:hover {
-    transform: translateY(-2px);
+    transform: translateX(4px);
     color: #ffffff;
     background: #7200ff;
     border-color: #7200ff;
-    box-shadow: 0 8px 25px rgba(114, 0, 255, 0.3);
 }
 
 .links a:hover svg {
     fill: #ffffff;
-    transform: scale(1.1);
-}
-
-.links a:active {
-    transform: translateY(1px);
+    transform: scale(1.05);
 }
 
 /* Audio Player Interactive Floating Toggle */
 .audio-control {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 24px;
+    right: 24px;
     z-index: 10;
-    width: 44px;
-    height: 44px;
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
     background: #ffffff;
     border: 2px solid #7200ff;
@@ -222,11 +224,11 @@ h1 {
     align-items: center;
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(114, 0, 255, 0.15);
-    transition: all 0.3s ease;
+    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .audio-control:hover {
-    transform: scale(1.08);
+    transform: scale(1.06);
     background: #7200ff;
 }
 
@@ -234,7 +236,7 @@ h1 {
     width: 18px;
     height: 18px;
     fill: #7200ff;
-    transition: fill 0.3s ease;
+    transition: fill 0.2s ease;
 }
 
 .audio-control:hover svg {
@@ -245,13 +247,13 @@ h1 {
     margin-top: 30px;
     font-size: 11px;
     color: #7200ff;
-    opacity: 0.7;
+    opacity: 0.65;
     letter-spacing: 1px;
     text-transform: uppercase;
     font-weight: 700;
 }
 
-/* Media Query explicitly to balance padding ergonomics for smaller touch targets */
+/* Media Query explicitly to balance padding ergonomics */
 @media (max-width: 400px) {
     .card {
         padding: 30px 18px;
@@ -273,21 +275,23 @@ h1 {
 
 <div class="bg"></div>
 
-<!-- Background Audio Element with Dark Aria URL -->
-<audio id="bg-music" src="https://github.com/bibekarish/bibek_arish/raw/refs/heads/main/Solo_Leveling_Ringtone___DARK_ARIA_Song_Ringtone___BGM_PR_Tone_MP3_256kbps_128k" loop preload="auto"></audio>
+<!-- Background Audio Element - Path targeted to raw repo format directly -->
+<audio id="bg-music" src="https://raw.githubusercontent.com/bibekarish/bibek_arish/main/Solo_Leveling_Ringtone___DARK_ARIA_Song_Ringtone___BGM_PR_Tone_MP3_256kbps_128k" loop preload="auto"></audio>
 
 <!-- Interactive Player Controls -->
 <div class="audio-control" id="audio-toggle" title="Toggle Music">
-    <!-- Play Icon default -->
     <svg id="audio-icon" viewBox="0 0 24 24">
-        <path d="M6 22h12a4 4 0 0 0 4-4V6a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v12a4 4 0 0 0 4 4zm2-14.5A1.5 1.5 0 0 1 9.5 6h5A1.5 1.5 0 0 1 16 7.5v6.17a3 3 0 1 1-2-2.83V9h-3v4.17a3 3 0 1 1-2-2.83V7.5z"/>
+        <!-- Default State: Play Icon -->
+        <path id="svg-path" d="M6 22h12a4 4 0 0 0 4-4V6a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v12a4 4 0 0 0 4 4zm2-14.5A1.5 1.5 0 0 1 9.5 6h5A1.5 1.5 0 0 1 16 7.5v6.17a3 3 0 1 1-2-2.83V9h-3v4.17a3 3 0 1 1-2-2.83V7.5z"/>
     </svg>
 </div>
 
 <div class="card">
 
+    <!-- Profile Picture Slot -->
     <div class="pfp">
-        <img src="https://i.imgur.com/2DhmtJ4.jpeg" alt="Bibek Profile Picture">
+        <!-- Handled fallback to your raw repo default PFP graphic easily -->
+        <img src="https://bibekarish.github.io/bibek_arish/logo.png" alt="Solo Leveling Profile">
     </div>
 
     <h1>👑 Bibek Arise</h1>
@@ -323,7 +327,7 @@ h1 {
             <span>Instagram</span>
         </a>
 
-        <!-- Website Link -->
+        <!-- Website Link (Self) -->
         <a href="#">
             <svg viewBox="0 0 24 24">
                 <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm8.818 8h-2.914c-.313-1.802-.79-3.418-1.411-4.766 1.83.676 3.36 1.942 4.325 4.766zM12 2.04c.823 1.576 1.47 3.542 1.844 5.96h-3.688c.374-2.418 1.021-3.984 1.844-5.96zm-4.493.194c-.621 1.348-1.098 2.964-1.411 4.766H3.182c.965-2.824 2.495-4.09 4.325-4.766zM2.115 10h3.298c-.06.65-.098 1.314-.098 2s.038 1.35.098 2H2.115c-.076-.649-.115-1.314-.115-2s.039-1.351.115-2zm3.985 6h2.914c.313 1.802.79 3.418 1.411 4.766-1.83-.676-3.36-1.942-4.325-4.766zm4.056 4.766c-.823-1.576-1.47-3.542-1.844-5.96h3.688c-.374 2.418-1.021 3.984-1.844 5.96zm4.493-.194c.621-1.348 1.098-2.964 1.411-4.766h2.914c-.965 2.824-2.495 4.09-4.325 4.766zm3.985-4.766c.06-.65.098-1.314.098-2s-.038-1.35-.098-2h3.298c.076.649.115 1.314.115 2s-.039 1.351-.115 2h-3.298zm-1.12-2h-6.72c-.048-.646-.08-1.31-.08-2s.032-1.354.08-2h6.72c.048.646.08 1.31.08 2s-.032 1.354-.08 2z"/>
@@ -341,36 +345,36 @@ h1 {
 <script>
 const music = document.getElementById('bg-music');
 const toggleBtn = document.getElementById('audio-toggle');
-const icon = document.getElementById('audio-icon');
+const svgPath = document.getElementById('svg-path');
 const gateScreen = document.getElementById('gate-screen');
 const enterBtn = document.getElementById('enter-btn');
 
-// Vector State SVG Paths for Play/Pause states
+// Optimized Vector SVG Strings (Pre-calculated without DOM-rebuild stutter)
 const playIconPath = "M6 22h12a4 4 0 0 0 4-4V6a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v12a4 4 0 0 0 4 4zm2-14.5A1.5 1.5 0 0 1 9.5 6h5A1.5 1.5 0 0 1 16 7.5v6.17a3 3 0 1 1-2-2.83V9h-3v4.17a3 3 0 1 1-2-2.83V7.5z";
 const pauseIconPath = "M6 19h4V5H6v14zm8-14v14h4V5h-4z";
 
 function startPlay() {
     music.play().then(() => {
-        icon.innerHTML = `<path d="${pauseIconPath}"/>`;
+        svgPath.setAttribute('d', pauseIconPath);
     }).catch(err => {
-        console.log("Audio pipeline exception handled.");
+        console.log("Audio process deferred safely.");
     });
 }
 
-// Master execution event for button click: Unblurs screen + fires music engine simultaneously
+// Master execution event
 enterBtn.addEventListener('click', () => {
     gateScreen.classList.add('hidden');
     startPlay();
 });
 
-// Manual floating switch action handling
+// Play/Pause Action handling
 toggleBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     if (music.paused) {
         startPlay();
     } else {
         music.pause();
-        icon.innerHTML = `<path d="${playIconPath}"/>`;
+        svgPath.setAttribute('d', playIconPath);
     }
 });
 </script>
