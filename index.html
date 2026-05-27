@@ -3,343 +3,317 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bibek Arise | Premium Light</title>
-<!-- Google Font for luxury aesthetic -->
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<title>Bibek Arise | Solo Leveling</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-/* Reset and core alignment across viewports */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow-x: hidden;
-    background: #ffffff;
-    color: #7200ff;
-    padding: 20px;
-}
-
-/* Premium smooth light gradient background - Optimized with Hardware Acceleration */
-.bg {
-    position: fixed;
-    inset: 0;
-    background: linear-gradient(-45deg, #ffffff, #f5efff, #e6d5ff, #ffffff);
-    background-size: 400% 400%;
-    animation: bg 16s ease infinite;
-    z-index: 1;
-    transform: translateZ(0); /* Forces GPU implementation */
-}
-
-@keyframes bg {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* Blur Overlay Gate - Optimized to prevent painting lag */
-.blur-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 999;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.5s;
-    will-change: opacity, visibility;
-}
-
-/* Button inside the overlay */
-.enter-btn {
-    padding: 16px 40px;
-    font-size: 16px;
-    font-weight: 800;
-    color: #7200ff;
-    background: #ffffff;
-    border: 2px solid #7200ff;
-    border-radius: 20px;
-    cursor: pointer;
-    box-shadow: 0 10px 30px rgba(114, 0, 255, 0.12);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease, color 0.25s ease;
-}
-
-.enter-btn:hover {
-    color: #ffffff;
-    background: #7200ff;
-    transform: translateY(-2px);
-    box-shadow: 0 15px 35px rgba(114, 0, 255, 0.25);
-}
-
-/* Active Hidden State for Overlay */
-.blur-overlay.hidden {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-/* Highly responsive fluid card container */
-.card {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    max-width: 380px;
-    padding: 35px 25px;
-    border-radius: 30px;
-    text-align: center;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 2px solid #7200ff;
-    box-shadow: 0 20px 40px rgba(114, 0, 255, 0.06);
-    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
-    will-change: transform;
-}
-
-.card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 25px 50px rgba(114, 0, 255, 0.14);
-}
-
-/* PFP Container with strict #7200ff boundary */
-.pfp {
-    width: 110px;
-    height: 110px;
-    margin: 0 auto;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 3px solid #7200ff;
-    box-shadow: 0 0 20px rgba(114, 0, 255, 0.3);
-    transition: transform 0.4s ease;
-    background: #000000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.card:hover .pfp {
-    transform: rotate(4deg) scale(1.04);
-}
-
-.pfp img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top center;
-}
-
-h1 {
-    margin-top: 20px;
-    font-size: 26px;
-    font-weight: 800;
-    letter-spacing: -0.5px;
-    color: #7200ff;
-}
-
-/* Bio Structure */
-.bio {
-    margin-top: 15px;
-    color: #7200ff;
-    font-size: 15px;
-    line-height: 1.8;
-    font-weight: 600;
-}
-
-.bio .intro {
-    font-size: 16px;
-    color: #7200ff;
-    font-weight: 800;
-    margin-bottom: 8px;
-}
-
-.links {
-    margin-top: 25px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-/* Links customized with responsive scaling */
-.links a {
-    text-decoration: none;
-    color: #7200ff;
-    font-weight: 700;
-    font-size: 15px;
-    padding: 14px 20px;
-    border-radius: 16px;
-    background: rgba(114, 0, 255, 0.04);
-    border: 1px solid rgba(114, 0, 255, 0.2);
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    transition: transform 0.25s ease, color 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
-}
-
-/* Strict #7200ff Icon Fill color */
-.links a svg {
-    width: 20px;
-    height: 20px;
-    fill: #7200ff;
-    flex-shrink: 0;
-    transition: fill 0.25s ease, transform 0.25s ease;
-}
-
-/* Premium Inversion Hover State */
-.links a:hover {
-    transform: translateX(4px);
-    color: #ffffff;
-    background: #7200ff;
-    border-color: #7200ff;
-}
-
-.links a:hover svg {
-    fill: #ffffff;
-    transform: scale(1.05);
-}
-
-/* Audio Player Interactive Floating Toggle */
-.audio-control {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    z-index: 10;
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    background: #ffffff;
-    border: 2px solid #7200ff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(114, 0, 255, 0.15);
-    transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.audio-control:hover {
-    transform: scale(1.06);
-    background: #7200ff;
-}
-
-.audio-control svg {
-    width: 18px;
-    height: 18px;
-    fill: #7200ff;
-    transition: fill 0.2s ease;
-}
-
-.audio-control:hover svg {
-    fill: #ffffff;
-}
-
-.footer {
-    margin-top: 30px;
-    font-size: 11px;
-    color: #7200ff;
-    opacity: 0.65;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-weight: 700;
-}
-
-/* Media Query explicitly to balance padding ergonomics */
-@media (max-width: 400px) {
-    .card {
-        padding: 30px 18px;
-        border-radius: 24px;
+    :root {
+        --purple: #7200ff;
+        --purple-dark: #5a00cc;
     }
-    h1 { font-size: 24px; }
-    .bio { font-size: 14px; }
-    .links a { padding: 12px 16px; font-size: 14px; }
-}
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #0a001f, #1a0033, #2a004d);
+        color: white;
+        overflow-x: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    /* Animated Background Orbs */
+    .bg-orbs {
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.15;
+        animation: float 25s infinite ease-in-out;
+    }
+
+    .orb1 { width: 600px; height: 600px; background: var(--purple); top: -10%; left: -10%; animation-delay: 0s; }
+    .orb2 { width: 500px; height: 500px; background: #a855f7; bottom: -15%; right: -10%; animation-delay: 8s; }
+    .orb3 { width: 400px; height: 400px; background: #c084fc; top: 30%; right: 20%; animation-delay: 15s; }
+
+    @keyframes float {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(60px, 60px); }
+    }
+
+    /* Blur Gate */
+    .blur-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        background: rgba(10, 0, 31, 0.85);
+        backdrop-filter: blur(24px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .blur-overlay.hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    .enter-btn {
+        padding: 18px 52px;
+        font-size: 18px;
+        font-weight: 800;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: white;
+        background: transparent;
+        border: 2px solid var(--purple);
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 0 40px rgba(114, 0, 255, 0.4);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .enter-btn::before {
+        content: '';
+        position: absolute;
+        top: 0; left: -100%;
+        width: 100%; height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        transition: 0.6s;
+    }
+
+    .enter-btn:hover::before {
+        left: 200%;
+    }
+
+    .enter-btn:hover {
+        transform: scale(1.08) translateY(-4px);
+        box-shadow: 0 0 60px rgba(114, 0, 255, 0.7);
+        background: rgba(114, 0, 255, 0.1);
+    }
+
+    /* Main Card */
+    .card {
+        position: relative;
+        z-index: 10;
+        width: 100%;
+        max-width: 400px;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(114, 0, 255, 0.3);
+        border-radius: 32px;
+        padding: 40px 30px;
+        text-align: center;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+        transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .card:hover {
+        transform: translateY(-12px);
+    }
+
+    .pfp {
+        width: 138px;
+        height: 138px;
+        margin: 0 auto 20px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 5px solid var(--purple);
+        box-shadow: 0 0 0 8px rgba(114, 0, 255, 0.15),
+                    0 0 40px rgba(114, 0, 255, 0.4);
+        transition: all 0.5s ease;
+    }
+
+    .card:hover .pfp {
+        transform: scale(1.08) rotate(6deg);
+        box-shadow: 0 0 0 12px rgba(114, 0, 255, 0.25),
+                    0 0 60px rgba(114, 0, 255, 0.6);
+    }
+
+    .pfp img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    h1 {
+        font-size: 32px;
+        font-weight: 800;
+        margin-bottom: 8px;
+        background: linear-gradient(90deg, #ffffff, #c084fc, #ffffff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+        color: #c4b5fd;
+        font-size: 15px;
+        margin-bottom: 24px;
+        font-weight: 500;
+    }
+
+    .bio {
+        color: #e0d4ff;
+        line-height: 1.7;
+        font-size: 15.5px;
+        margin-bottom: 32px;
+    }
+
+    .links {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .links a {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px 20px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(114, 0, 255, 0.2);
+        border-radius: 20px;
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 15.5px;
+        transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .links a:hover {
+        transform: translateX(12px) scale(1.02);
+        background: rgba(114, 0, 255, 0.15);
+        border-color: var(--purple);
+        box-shadow: 0 10px 30px rgba(114, 0, 255, 0.25);
+    }
+
+    .links a svg {
+        width: 24px;
+        height: 24px;
+        fill: #c4b5fd;
+        transition: all 0.3s ease;
+    }
+
+    .links a:hover svg {
+        fill: white;
+        transform: scale(1.15);
+    }
+
+    /* Audio Player */
+    .audio-control {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 100;
+        width: 58px;
+        height: 58px;
+        background: rgba(255,255,255,0.1);
+        border: 2px solid var(--purple);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        backdrop-filter: blur(12px);
+        box-shadow: 0 8px 25px rgba(114, 0, 255, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    .audio-control:hover {
+        transform: scale(1.12);
+        background: var(--purple);
+    }
+
+    .footer {
+        margin-top: 40px;
+        font-size: 12px;
+        opacity: 0.6;
+        letter-spacing: 1px;
+    }
 </style>
 </head>
 
 <body>
 
-<!-- Tap to Enter Unblur Layer -->
-<div class="blur-overlay" id="gate-screen">
-    <button class="enter-btn" id="enter-btn">Tap to Arise</button>
+<div class="bg-orbs">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
 </div>
 
-<div class="bg"></div>
-
-<!-- Background Audio Element - Path targeted to raw repo format directly -->
-<audio id="bg-music" src="https://raw.githubusercontent.com/bibekarish/bibek_arish/main/Solo_Leveling_Ringtone___DARK_ARIA_Song_Ringtone___BGM_PR_Tone_MP3_256kbps_128k" loop preload="auto"></audio>
-
-<!-- Interactive Player Controls -->
-<div class="audio-control" id="audio-toggle" title="Toggle Music">
-    <svg id="audio-icon" viewBox="0 0 24 24">
-        <!-- Default State: Play Icon -->
-        <path id="svg-path" d="M6 22h12a4 4 0 0 0 4-4V6a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v12a4 4 0 0 0 4 4zm2-14.5A1.5 1.5 0 0 1 9.5 6h5A1.5 1.5 0 0 1 16 7.5v6.17a3 3 0 1 1-2-2.83V9h-3v4.17a3 3 0 1 1-2-2.83V7.5z"/>
-    </svg>
+<!-- Tap to Enter -->
+<div class="blur-overlay" id="gate-screen">
+    <button class="enter-btn" id="enter-btn">TAP TO ARISE</button>
 </div>
 
 <div class="card">
 
-    <!-- Profile Picture Slot -->
     <div class="pfp">
-        <!-- Handled fallback to your raw repo default PFP graphic easily -->
-        <img src="https://bibekarish.github.io/bibek_arish/logo.png" alt="Solo Leveling Profile">
+        <img src="https://bibekarish.github.io/bibek_arish/logo.png" alt="Bibek Arise">
     </div>
 
     <h1>👑 Bibek Arise</h1>
+    <div class="subtitle">Shadow Monarch • Leveling Up Daily</div>
 
     <div class="bio">
-        <div class="intro">Hey, I'm B i b e k</div>
-        🟣 Canning, West Bengal <br>
-        🟣 Coding • Workout • Anime
+        Canning, West Bengal<br>
+        Coding • Gym • Anime • Solo Leveling
     </div>
 
     <div class="links">
-        <!-- Discord Link -->
         <a href="https://discord.gg/Kb5JzbdBV5" target="_blank">
-            <svg viewBox="0 0 127.14 96.36">
-                <path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a74.37,74.37,0,0,0,6.72-11A68.21,68.21,0,0,1,28.1,80.12c.91-.66,1.8-1.34,2.65-2a75.58,75.58,0,0,0,65.66,0c.85.69,1.74,1.37,2.65,2a68.42,68.42,0,0,1-10.64,5.21,74.1,74.1,0,0,0,6.72,11,105.73,105.73,0,0,0,31-18.83C129.44,49.52,123.6,26.69,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.83,46,53.83,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.07,46,96.07,53,91,65.69,84.69,65.69Z"/>
-            </svg>
-            <span>Discord</span>
+            <svg viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a74.37,74.37,0,0,0,6.72-11A68.21,68.21,0,0,1,28.1,80.12c.91-.66,1.8-1.34,2.65-2a75.58,75.58,0,0,0,65.66,0c.85.69,1.74,1.37,2.65,2a68.42,68.42,0,0,1-10.64,5.21,74.1,74.1,0,0,0,6.72,11,105.73,105.73,0,0,0,31-18.83C129.44,49.52,123.6,26.69,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.83,46,53.83,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.07,46,96.07,53,91,65.69,84.69,65.69Z"/></svg>
+            <span>Discord Server</span>
         </a>
 
-        <!-- YouTube Link -->
-        <a href="https://youtube.com/@bybexc?si=QKmkN9D5ciKGtO9B" target="_blank">
-            <svg viewBox="0 0 24 24">
-                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-            </svg>
+        <a href="https://youtube.com/@bybexc" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
             <span>YouTube</span>
         </a>
 
-        <!-- Instagram Link -->
-        <a href="https://www.instagram.com/bibek_arish?igsh=ZmhjNnN6NTA3dm13" target="_blank">
-            <svg viewBox="0 0 24 24">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
-            </svg>
+        <a href="https://www.instagram.com/bibek_arish" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
             <span>Instagram</span>
         </a>
 
-        <!-- Website Link (Self) -->
-        <a href="#">
-            <svg viewBox="0 0 24 24">
-                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm8.818 8h-2.914c-.313-1.802-.79-3.418-1.411-4.766 1.83.676 3.36 1.942 4.325 4.766zM12 2.04c.823 1.576 1.47 3.542 1.844 5.96h-3.688c.374-2.418 1.021-3.984 1.844-5.96zm-4.493.194c-.621 1.348-1.098 2.964-1.411 4.766H3.182c.965-2.824 2.495-4.09 4.325-4.766zM2.115 10h3.298c-.06.65-.098 1.314-.098 2s.038 1.35.098 2H2.115c-.076-.649-.115-1.314-.115-2s.039-1.351.115-2zm3.985 6h2.914c.313 1.802.79 3.418 1.411 4.766-1.83-.676-3.36-1.942-4.325-4.766zm4.056 4.766c-.823-1.576-1.47-3.542-1.844-5.96h3.688c-.374 2.418-1.021 3.984-1.844 5.96zm4.493-.194c.621-1.348 1.098-2.964 1.411-4.766h2.914c-.965 2.824-2.495 4.09-4.325 4.766zm3.985-4.766c.06-.65.098-1.314.098-2s-.038-1.35-.098-2h3.298c.076.649.115 1.314.115 2s-.039 1.351-.115 2h-3.298zm-1.12-2h-6.72c-.048-.646-.08-1.31-.08-2s.032-1.354.08-2h6.72c.048.646.08 1.31.08 2s-.032 1.354-.08 2z"/>
-            </svg>
+        <a href="#" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm8.818 8h-2.914c-.313-1.802-.79-3.418-1.411-4.766 1.83.676 3.36 1.942 4.325 4.766zM12 2.04c.823 1.576 1.47 3.542 1.844 5.96h-3.688c.374-2.418 1.021-3.984 1.844-5.96zm-4.493.194c-.621 1.348-1.098 2.964-1.411 4.766H3.182c.965-2.824 2.495-4.09 4.325-4.766zM2.115 10h3.298c-.06.65-.098 1.314-.098 2s.038 1.35.098 2H2.115c-.076-.649-.115-1.314-.115-2s.039-1.351.115-2zm3.985 6h2.914c.313 1.802.79 3.418 1.411 4.766-1.83-.676-3.36-1.942-4.325-4.766zm4.056 4.766c-.823-1.576-1.47-3.542-1.844-5.96h3.688c-.374 2.418-1.021 3.984-1.844 5.96zm4.493-.194c.621-1.348 1.098-2.964 1.411-4.766h2.914c-.965 2.824-2.495 4.09-4.325 4.766zm3.985-4.766c.06-.65.098-1.314.098-2s-.038-1.35-.098-2h3.298c.076.649.115 1.314.115 2s-.039 1.351-.115 2h-3.298zm-1.12-2h-6.72c-.048-.646-.08-1.31-.08-2s.032-1.354.08-2h6.72c.048.646.08 1.31.08 2s-.032 1.354-.08-2z"/></svg>
             <span>Website</span>
         </a>
     </div>
 
     <div class="footer">
-        Made with 💜 by Bibek
+        Made with 💜 by Bibek Arise
     </div>
+</div>
 
+<!-- Audio -->
+<audio id="bg-music" loop preload="auto">
+    <source src="https://raw.githubusercontent.com/bibekarish/bibek_arish/main/Solo_Leveling_Ringtone___DARK_ARIA_Song_Ringtone___BGM_PR_Tone_MP3_256kbps_128k" type="audio/mp3">
+</audio>
+
+<div class="audio-control" id="audio-toggle" title="Toggle Music">
+    <svg id="audio-icon" width="28" height="28" viewBox="0 0 24 24" fill="white">
+        <path id="svg-path" d="M8 5.14v14l11-7z"/>
+    </svg>
 </div>
 
 <script>
@@ -349,32 +323,26 @@ const svgPath = document.getElementById('svg-path');
 const gateScreen = document.getElementById('gate-screen');
 const enterBtn = document.getElementById('enter-btn');
 
-// Optimized Vector SVG Strings (Pre-calculated without DOM-rebuild stutter)
-const playIconPath = "M6 22h12a4 4 0 0 0 4-4V6a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v12a4 4 0 0 0 4 4zm2-14.5A1.5 1.5 0 0 1 9.5 6h5A1.5 1.5 0 0 1 16 7.5v6.17a3 3 0 1 1-2-2.83V9h-3v4.17a3 3 0 1 1-2-2.83V7.5z";
-const pauseIconPath = "M6 19h4V5H6v14zm8-14v14h4V5h-4z";
+const playPath = "M8 5.14v14l11-7z";
+const pausePath = "M6 19h4V5H6v14zm8-14v14h4V5h-4z";
 
-function startPlay() {
-    music.play().then(() => {
-        svgPath.setAttribute('d', pauseIconPath);
-    }).catch(err => {
-        console.log("Audio process deferred safely.");
-    });
+function playMusic() {
+    music.play().catch(() => {});
+    svgPath.setAttribute('d', pausePath);
 }
 
-// Master execution event
 enterBtn.addEventListener('click', () => {
     gateScreen.classList.add('hidden');
-    startPlay();
+    playMusic();
 });
 
-// Play/Pause Action handling
 toggleBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     if (music.paused) {
-        startPlay();
+        playMusic();
     } else {
         music.pause();
-        svgPath.setAttribute('d', playIconPath);
+        svgPath.setAttribute('d', playPath);
     }
 });
 </script>
