@@ -42,12 +42,56 @@ body {
     100% { background-position: 0% 50%; }
 }
 
+/* Blur Overlay Gate - Restricts interface view until interaction */
+.blur-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.8s;
+}
+
+/* Button inside the overlay */
+.enter-btn {
+    padding: 16px 40px;
+    font-size: 16px;
+    font-weight: 800;
+    color: #7200ff;
+    background: #ffffff;
+    border: 2px solid #7200ff;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(114, 0, 255, 0.15);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.enter-btn:hover {
+    color: #ffffff;
+    background: #7200ff;
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(114, 0, 255, 0.3);
+}
+
+/* Active Hidden State for Overlay */
+.blur-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
 /* Highly responsive fluid card container */
 .card {
     position: relative;
     z-index: 2;
     width: 100%;
-    max-width: 380px; /* Limits desktop stretch */
+    max-width: 380px;
     padding: 35px 25px;
     border-radius: 30px;
     text-align: center;
@@ -222,10 +266,15 @@ h1 {
 
 <body>
 
+<!-- Tap to Enter Unblur Layer -->
+<div class="blur-overlay" id="gate-screen">
+    <button class="enter-btn" id="enter-btn">Tap to Arise</button>
+</div>
+
 <div class="bg"></div>
 
-<!-- Updated Background Audio Element with Dark Aria URL -->
-<audio id="bg-music" src="https://github.com/bibekarish/bibek_arish/raw/refs/heads/main/Solo_Leveling_Ringtone___DARK_ARIA_Song_Ringtone___BGM_PR_Tone_MP3_256kbps_128k" loop></audio>
+<!-- Background Audio Element with Dark Aria URL -->
+<audio id="bg-music" src="https://github.com/bibekarish/bibek_arish/raw/refs/heads/main/Solo_Leveling_Ringtone___DARK_ARIA_Song_Ringtone___BGM_PR_Tone_MP3_256kbps_128k" loop preload="auto"></audio>
 
 <!-- Interactive Player Controls -->
 <div class="audio-control" id="audio-toggle" title="Toggle Music">
@@ -244,7 +293,7 @@ h1 {
     <h1>👑 Bibek Arise</h1>
 
     <div class="bio">
-        <div class="intro">Hey, I'm __B i b e k__</div>
+        <div class="intro">Hey, I'm B i b e k</div>
         🟣 Canning, West Bengal <br>
         🟣 Coding • Workout • Anime
     </div>
@@ -293,19 +342,30 @@ h1 {
 const music = document.getElementById('bg-music');
 const toggleBtn = document.getElementById('audio-toggle');
 const icon = document.getElementById('audio-icon');
+const gateScreen = document.getElementById('gate-screen');
+const enterBtn = document.getElementById('enter-btn');
 
-// Integrated Vector State Paths for Play/Pause states
+// Vector State SVG Paths for Play/Pause states
 const playIconPath = "M6 22h12a4 4 0 0 0 4-4V6a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v12a4 4 0 0 0 4 4zm2-14.5A1.5 1.5 0 0 1 9.5 6h5A1.5 1.5 0 0 1 16 7.5v6.17a3 3 0 1 1-2-2.83V9h-3v4.17a3 3 0 1 1-2-2.83V7.5z";
 const pauseIconPath = "M6 19h4V5H6v14zm8-14v14h4V5h-4z";
 
-// Attempt autoplay instantly when interaction happens or layout finishes rendering
-window.addEventListener('click', () => {
-    if (music.paused && music.readyState >= 2) {
-        startPlay();
-    }
-}, { once: true });
+function startPlay() {
+    music.play().then(() => {
+        icon.innerHTML = `<path d="${pauseIconPath}"/>`;
+    }).catch(err => {
+        console.log("Audio pipeline exception handled.");
+    });
+}
 
-toggleBtn.addEventListener('click', () => {
+// Master execution event for button click: Unblurs screen + fires music engine simultaneously
+enterBtn.addEventListener('click', () => {
+    gateScreen.classList.add('hidden');
+    startPlay();
+});
+
+// Manual floating switch action handling
+toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
     if (music.paused) {
         startPlay();
     } else {
@@ -313,12 +373,6 @@ toggleBtn.addEventListener('click', () => {
         icon.innerHTML = `<path d="${playIconPath}"/>`;
     }
 });
-
-function startPlay() {
-    music.play().then(() => {
-        icon.innerHTML = `<path d="${pauseIconPath}"/>`;
-    }).catch(err => console.log("Interaction required to trigger background track."));
-}
 </script>
 
 </body>
