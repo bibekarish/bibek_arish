@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>Anime TV Player</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #080808;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: auto;
+      padding: 15px;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin: 5px 0 15px;
+    }
+
+    .player-box {
+      position: relative;
+      width: 100%;
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    video {
+      display: block;
+      width: 100%;
+      max-height: 75vh;
+      background: #000;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 12px;
+      background: #151515;
+    }
+
+    button,
+    a.download {
+      border: none;
+      border-radius: 8px;
+      padding: 11px 16px;
+      background: #242424;
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    button:hover,
+    a.download:hover {
+      background: #333;
+    }
+
+    .progress-area {
+      width: 100%;
+      padding: 10px 12px;
+      background: #111;
+    }
+
+    #progress {
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .time {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: #bbb;
+      margin-top: 5px;
+    }
+
+    .info {
+      padding: 12px 0;
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 8px;
+      }
+
+      h1 {
+        font-size: 18px;
+      }
+
+      button,
+      a.download {
+        flex: 1;
+        min-width: 100px;
+        padding: 10px;
+        font-size: 14px;
+      }
+
+      video {
+        max-height: 60vh;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>🎬 Anime TV</h1>
+
+  <div class="player-box">
+
+    <video id="video"
+           playsinline
+           preload="metadata">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <div class="progress-area">
+      <input
+        id="progress"
+        type="range"
+        min="0"
+        max="100"
+        value="0"
+      >
+
+      <div class="time">
+        <span id="currentTime">00:00</span>
+        <span id="duration">00:00</span>
+      </div>
+    </div>
+
+    <div class="controls">
+
+      <button id="playBtn">
+        ▶️ Play
+      </button>
+
+      <button id="fullscreenBtn">
+        📺 Fullscreen
+      </button>
+
+      <button id="muteBtn">
+        🔊 Sound
+      </button>
+
+      <a
+        id="downloadBtn"
+        class="download"
+        target="_blank"
+        rel="noopener">
+        ⬇️ Download
+      </a>
+
+    </div>
+
+  </div>
+
+  <div class="info">
+    📱 Mobile Friendly • 🔄 Progress Saving
+  </div>
+
+</div>
+
+<script>
+
+  /*
+   * Google Drive File ID
+   */
+  const FILE_ID =
+    "1-rpBtK-7x64OigjAxinsfnUGjdDNAFW3";
+
+
+  /*
+   * Google Drive URL
+   */
+  const videoURL =
+    `https://drive.google.com/uc?export=download&id=${FILE_ID}`;
+
+
+  const video =
+    document.getElementById("video");
+
+  const playBtn =
+    document.getElementById("playBtn");
+
+  const fullscreenBtn =
+    document.getElementById("fullscreenBtn");
+
+  const muteBtn =
+    document.getElementById("muteBtn");
+
+  const downloadBtn =
+    document.getElementById("downloadBtn");
+
+  const progress =
+    document.getElementById("progress");
+
+  const currentTime =
+    document.getElementById("currentTime");
+
+  const duration =
+    document.getElementById("duration");
+
+
+  /*
+   * Set video URL
+   */
+  video.src = videoURL;
+
+  downloadBtn.href = videoURL;
+
+
+  /*
+   * Play / Pause
+   */
+  playBtn.addEventListener("click", async () => {
+
+    if (video.paused) {
+
+      try {
+        await video.play();
+        playBtn.textContent = "⏸️ Pause";
+      } catch (error) {
+
+        alert(
+          "Video direct playback is not available from this Google Drive file."
+        );
+
+      }
+
+    } else {
+
+      video.pause();
+      playBtn.textContent = "▶️ Play";
+
+    }
+
+  });
+
+
+  /*
+   * Video play event
+   */
+  video.addEventListener("play", () => {
+    playBtn.textContent = "⏸️ Pause";
+  });
+
+
+  /*
+   * Video pause event
+   */
+  video.addEventListener("pause", () => {
+    playBtn.textContent = "▶️ Play";
+  });
+
+
+  /*
+   * Duration
+   */
+  video.addEventListener("loadedmetadata", () => {
+
+    duration.textContent =
+      formatTime(video.duration);
+
+    loadProgress();
+
+  });
+
+
+  /*
+   * Progress update
+   */
+  video.addEventListener("timeupdate", () => {
+
+    if (!video.duration) return;
+
+    const percent =
+      (video.currentTime / video.duration) * 100;
+
+    progress.value = percent;
+
+    currentTime.textContent =
+      formatTime(video.currentTime);
+
+    saveProgress();
+
+  });
+
+
+  /*
+   * Seek
+   */
+  progress.addEventListener("input", () => {
+
+    if (!video.duration) return;
+
+    video.currentTime =
+      (progress.value / 100) * video.duration;
+
+  });
+
+
+  /*
+   * Fullscreen
+   */
+  fullscreenBtn.addEventListener("click", async () => {
+
+    try {
+
+      if (document.fullscreenElement) {
+
+        await document.exitFullscreen();
+
+      } else {
+
+        await video.requestFullscreen();
+
+      }
+
+    } catch (error) {
+
+      /*
+       * Some mobile browsers don't allow
+       * fullscreen directly on video.
+       */
+      alert("Fullscreen is not supported by this browser.");
+
+    }
+
+  });
+
+
+  /*
+   * Mute
+   */
+  muteBtn.addEventListener("click", () => {
+
+    video.muted = !video.muted;
+
+    muteBtn.textContent =
+      video.muted
+        ? "🔇 Muted"
+        : "🔊 Sound";
+
+  });
+
+
+  /*
+   * Save playback position
+   */
+  function saveProgress() {
+
+    if (!video.currentTime) return;
+
+    localStorage.setItem(
+      "anime_tv_progress_" + FILE_ID,
+      video.currentTime
+    );
+
+  }
+
+
+  /*
+   * Load playback position
+   */
+  function loadProgress() {
+
+    const saved =
+      localStorage.getItem(
+        "anime_tv_progress_" + FILE_ID
+      );
+
+    if (saved) {
+
+      video.currentTime =
+        Number(saved);
+
+    }
+
+  }
+
+
+  /*
+   * Time formatter
+   */
+  function formatTime(seconds) {
+
+    if (!Number.isFinite(seconds)) {
+      return "00:00";
+    }
+
+    const h =
+      Math.floor(seconds / 3600);
+
+    const m =
+      Math.floor((seconds % 3600) / 60);
+
+    const s =
+      Math.floor(seconds % 60);
+
+    if (h > 0) {
+
+      return (
+        String(h).padStart(2, "0") +
+        ":" +
+        String(m).padStart(2, "0") +
+        ":" +
+        String(s).padStart(2, "0")
+      );
+
+    }
+
+    return (
+      String(m).padStart(2, "0") +
+      ":" +
+      String(s).padStart(2, "0")
+    );
+
+  }
+
+</script>
+
+</body>
+</html>
